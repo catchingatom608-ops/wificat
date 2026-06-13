@@ -1,0 +1,63 @@
+================================================================
+ WifiCat — BW16 (RTL8720DN) firmware flashing instructions
+================================================================
+
+WHAT YOU NEED
+  - Ai-Thinker BW16 board connected to your PC over USB-UART
+  - Windows (this flasher is upload_image.exe)
+  - The files in this folder
+
+THE FILES
+  upload_image.exe ............ the Realtek AmebaD flash tool
+  flash_bw16.bat .............. one-click flash helper
+  bins\ ....................... the firmware images:
+       km0_boot_all.bin ....... KM0 bootloader
+       km4_boot_all.bin ....... KM4 bootloader
+       km0_km4_image2.bin ..... the WifiCat firmware (the sketch)
+       imgtool_flashloader_amebad.bin  flash loader
+
+----------------------------------------------------------------
+EASIEST WAY — the .bat
+----------------------------------------------------------------
+  1. Put the BW16 into download/flash mode:
+         hold the BURN/BOOT button, tap RESET, release BURN.
+  2. Find the BW16's COM port (Device Manager > Ports).
+  3. Open PowerShell IN THIS FOLDER and run:
+
+         .\flash_bw16.bat COM5
+
+     (replace COM5 with your port)
+
+  4. Wait for it to finish, then press RESET on the BW16.
+     On boot the RGB LED blinks RED -> GREEN -> BLUE, then stays
+     GREEN = ready.
+
+----------------------------------------------------------------
+MANUAL WAY — upload_image.exe directly
+----------------------------------------------------------------
+     upload_image.exe  .\bins  COM5
+
+  (first argument = the folder with the .bin files; second = COM port)
+
+----------------------------------------------------------------
+WIRING TO THE FLIPPER
+----------------------------------------------------------------
+  BW16  TX  ->  Flipper  pin 14 (RX)
+  BW16  GND ->  Flipper  GND
+  (optional, for sending commands: Flipper pin 13 (TX) -> BW16 RX)
+
+  Baud is 115200. WifiCat outputs its protocol on BOTH the BW16
+  log-UART and Serial1, so either TX pin works.
+
+----------------------------------------------------------------
+THE FLIPPER APP
+----------------------------------------------------------------
+  Copy  ../app/wificat.fap  to your Flipper SD card at:
+        SD/apps/Tools/wificat.fap
+  Then open it from  Apps > Tools > WifiCat.
+
+LED MEANINGS
+  green steady = idle/ready      yellow = scanning
+  red flicker  = deauthing       blue   = monitoring/hunting
+  magenta      = soft-AP active
+================================================================

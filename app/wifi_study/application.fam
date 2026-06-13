@@ -1,0 +1,13 @@
+App(
+    appid="wifi_study",
+    name="WifiCat",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="wifi_study_app",
+    requires=["gui", "dialogs", "storage"],
+    stack_size=10 * 1024,
+    fap_category="Tools",
+    fap_version=(4, 1),
+    fap_description="802.11 dual-band analyzer: scan, capture, deauth, portal",
+    fap_icon="icon.png",
+    fap_file_assets="assets",
+)

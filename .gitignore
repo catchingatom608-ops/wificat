@@ -1,0 +1,13 @@
+# build artifacts
+app/wifi_study/dist/
+app/wifi_study/build/
+app/wifi_study/.vscode/
+*.o
+*.elf
+*.map
+*.axf
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
